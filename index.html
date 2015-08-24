@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue js examples</title>
+	<link rel="stylesheet" href="./bootstrap.css">
+	<link rel="stylesheet" href="./app.css">
+</head>
+<body>
+
+	<div class="container">
+		<div id="tasks">
+			<div class="col-sm-4 col-sm-offset-3">
+				
+				<h1 v-show="remaining.length">TASKS ({{ remaining.length }})</h1>
+
+				<ol class="list-group">
+					<li v-repeat="task: tasks | inProcess" class="list-group-item">
+						<span v-on="dblclick: editTask(task)">{{ task.body }}</span>
+						<button v-on="click: removeTask(task)">&#10007;</button>
+						<button v-on="click: toggleCompletionTask(task)">&#10004;</button>
+					</li>
+				</ol>
+				
+				<form v-on="submit: addTask">
+					
+					<div class="form-group">
+						<input type="text" 
+							   v-model="newTask" 
+							   v-el="newTask" 
+							   placeholder="I need to..." 
+							   class="form-control"
+						>
+					</div>
+
+					<button class="btn btn-primary">Send</button>
+					<button v-on="click: completeAll" class="btn btn-default">complete all!</button>
+
+				</form>
+				
+				<div v-if="completions.length">
+					<h2>Completed ({{ completions.length }})</h2>
+
+					<ol class="list-group">
+						<li v-repeat="task: tasks | filterBy true in completed" class="list-group-item">
+							{{ task.body }}
+							<button v-on="click: toggleCompletionTask(task)">&#10007;</button>
+						</li>
+					</ol>
+
+					<button class="btn btn-danger" v-on="click: clearCompleted">Clear all completed</button>
+
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<script src="vue.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

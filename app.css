@@ -1,0 +1,8 @@
+li button{
+	border: none;
+	color: red;
+	background-color: transparent;
+	padding: 0;
+	float: right;
+	margin-left: 10px;
+}
